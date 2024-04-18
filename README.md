@@ -1,4 +1,24 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# ontheway
+It is under construction 🚜
+
+This is my blog for my programming learning journey!! 
+
+Note:
+
+Next.js 14
+
+Shadcn UI
+
+Aceternity UI
+
+React-icon
+
+MDX
+
+Tailwind CSS
+
+
+
 
 ## Getting Started
 
@@ -39,4 +59,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 stack: shadcnUI
 mdx
-# ontheway
+
