@@ -33,6 +33,10 @@
     --ring: 222.2 84% 4.9%;
 
     --radius: 0.5rem;
+
+    --pink: lab(56.24, 63.18 -1.47);
+    --purple: lab(30 30.09 -80.19);
+    --text: #fff;
   }
 
   .dark {
@@ -77,12 +81,12 @@
 
 @property --myColor1 {
   syntax: "<color>";
-  initial-value: #222;
+  initial-value: #ed4c67;
   inherits: false;
 }
 @property --myColor2 {
   syntax: "<color>";
-  initial-value: #222;
+  initial-value: #ed4c67;
   inherits: false;
 }
 

@@ -11,6 +11,9 @@ export const metadata: Metadata = {
   title: siteConfig.name,
   description: siteConfig.description,
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? siteConfig.url),
+  icons: {
+    icon: "/favicon.png", // /public path
+  },
 };
 
 export default function RootLayout({
@@ -21,7 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="grid grid-rows-[auto_1fr_auto] min-h-screen bg-pink-200">
+        <div className="grid grid-rows-[auto_1fr_auto] min-h-screen bg-black/80">
           <Header />
           <main className="flex items-center justify-center">{children}</main>
           <Footer />

@@ -12,7 +12,7 @@ export default function HomeLink() {
       href="/"
       className={[
         sans.className,
-        "inline-block text-2xl font-black",
+        "inline-block text-3xl font-bold",
         isActive ? "" : "hover:scale-[1.02]",
       ].join(" ")}
     >

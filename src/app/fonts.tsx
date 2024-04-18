@@ -1,9 +1,9 @@
-import { Montserrat, Merriweather } from "next/font/google";
+import { Montserrat, Merriweather, Seymour_One, Rowdies } from "next/font/google";
 
-export const sans = Montserrat({
+export const sans = Rowdies({
   subsets: ["latin"],
   display: "swap",
-  weight: ["400", "700", "900"],
+  weight: ["400", "700"],
   style: ["normal"],
 });
 
