@@ -4,52 +4,62 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Link from 'next/link';
 import { useState } from 'react';
 
-export const HoverEffect = ({
-  items,
-  className,
-}: {
-  items: {
-    title: string;
-    description: string;
-    link: string;
-  }[];
-  className?: string;
-}) => {
+export const HoverEffect = ({ items, className }: { items: any; className?: string }) => {
   let [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
     <div className={cn('grid grid-cols-1 py-10 max-w-[500px]', className)}>
-      {items.map((item, idx) => (
-        <Link
-          href={item?.link}
-          key={item?.link}
-          className="relative group  block p-2 h-full w-full"
-          onMouseEnter={() => setHoveredIndex(idx)}
-          onMouseLeave={() => setHoveredIndex(null)}
-        >
-          <AnimatePresence>
-            {hoveredIndex === idx && (
-              <motion.span
-                className="absolute inset-0 h-full w-full bg-neutral-700 dark:bg-slate-800/[0.6] block  rounded-3xl"
-                layoutId="hoverBackground"
-                initial={{ opacity: 0 }}
-                animate={{
-                  opacity: 1,
-                  transition: { duration: 0.15 },
-                }}
-                exit={{
-                  opacity: 0,
-                  transition: { duration: 0.15, delay: 0.2 },
-                }}
-              />
-            )}
-          </AnimatePresence>
-          <Card>
-            <CardTitle>{item.title}</CardTitle>
-            <CardDescription>{item.description}</CardDescription>
-          </Card>
-        </Link>
-      ))}
+      {items.map((item: any, idx: number) => {
+        if (!item.meta.published) return null;
+        const publishedAt = new Date(item.meta.date);
+        const formattedDate = new Intl.DateTimeFormat('en-US', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric',
+        }).format(publishedAt);
+        return (
+          <Link
+            href={`/blogs/${item?.slug}`}
+            key={idx}
+            className="relative group  block p-2 h-full w-full"
+            onMouseEnter={() => setHoveredIndex(idx)}
+            onMouseLeave={() => setHoveredIndex(null)}
+          >
+            <AnimatePresence>
+              {hoveredIndex === idx && (
+                <motion.span
+                  className="absolute inset-0 h-full w-full bg-neutral-700 dark:bg-slate-800/[0.6] block  rounded-xl"
+                  layoutId="hoverBackground"
+                  initial={{ opacity: 0 }}
+                  animate={{
+                    opacity: 1,
+                    transition: { duration: 0.15 },
+                  }}
+                  exit={{
+                    opacity: 0,
+                    transition: { duration: 0.15, delay: 0.2 },
+                  }}
+                />
+              )}
+            </AnimatePresence>
+            <Card>
+              <p className="text-white text-[10px] mb-3">{formattedDate}</p>
+              <CardTitle>{item.meta.title}</CardTitle>
+              <ul className="flex gap-2 mt-3">
+                {item.meta.tags.map((tag: string) => (
+                  <p
+                    key={tag}
+                    className="text-xs text-white border-[0.5px] border-white py-0.5 px-1 rounded"
+                  >
+                    {tag}
+                  </p>
+                ))}
+              </ul>
+              <CardDescription>{item.meta.description}</CardDescription>
+            </Card>
+          </Link>
+        );
+      })}
     </div>
   );
 };
@@ -64,7 +74,7 @@ export const Card = ({
   return (
     <div
       className={cn(
-        'rounded-2xl h-full w-full p-3 overflow-hidden bg-gray-900 border border-transparent dark:border-white/[0.1] group-hover:border-lime-400 relative z-20',
+        'rounded-xl h-full w-full p-1 overflow-hidden bg-zinc-700 border-2 border-transparent dark:border-white/[0.1] group-hover:border-red-400 relative z-20',
         className
       )}
     >
@@ -82,9 +92,7 @@ export const CardTitle = ({
   children: React.ReactNode;
 }) => {
   return (
-    <h4 className={cn('text-zinc-200 font-bold tracking-wide mt-1 text-xl', className)}>
-      {children}
-    </h4>
+    <h4 className={cn('text-zinc-200 font-bold tracking-wide text-xl', className)}>{children}</h4>
   );
 };
 export const CardDescription = ({
