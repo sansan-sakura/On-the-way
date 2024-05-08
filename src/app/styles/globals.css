@@ -35,7 +35,7 @@
     --radius: 0.5rem;
 
     --pink: lab(56.24, 63.18 -1.47);
-    --purple: lab(30 30.09 -80.19);
+    --yellow: #fcd34d;
     --text: #fff;
   }
 
@@ -80,13 +80,13 @@
 }
 
 @property --myColor1 {
-  syntax: "<color>";
-  initial-value: #ed4c67;
+  syntax: '<color>';
+  initial-value: #fca5a5;
   inherits: false;
 }
 @property --myColor2 {
-  syntax: "<color>";
-  initial-value: #ed4c67;
+  syntax: '<color>';
+  initial-value: #fca5a5;
   inherits: false;
 }
 
