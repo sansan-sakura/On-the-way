@@ -24,7 +24,9 @@ export default function RootLayout({
       <body className={lato.className}>
         <div className="grid grid-rows-[auto_1fr_auto] min-h-screen bg-black/80">
           <Header />
-          <main className="mx-auto max-w-[900px] flex items-center justify-center">{children}</main>
+          <main className="w-screen px-6 sm:mx-auto sm:max-w-[900px] flex items-center justify-center">
+            {children}
+          </main>
           <Footer />
         </div>
       </body>

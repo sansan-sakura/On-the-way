@@ -1,0 +1,114 @@
+---
+title: Custome i18n
+description: How to make your website internationalized without react-i18n
+date: 2023-11-02
+tags: ['internationalization', 'i18n', 'React']
+published: true
+---
+
+<img src="/blogs/first-post/image.webp" />
+
+Would you like to know how to internationalise your website without using react-118n?As a beginner
+Frontend Developer, I feel that it is crucial that you try to learn to do it yourself, and to
+understand how the code works. I have tried to avoid Libraries as I learn, and this has challenged
+me in many ways.While completing my portfolio project as a Web Development student at Technigo (an
+amazing Tech company, based in Sweden, but fully remote), and learning the basics of React and the
+importance of accessibility, I decided to challenge myself by implementing multi-language
+functionality. I was unaware of i18n at the time and found that it is actually quite simple to do
+this without it! Let me show you how. (If you are unsure of how to set up a React project, check
+out <a href="https://medium.com/@stenlisuryadinata/how-to-build-a-react-app-from-scratch-e454304d542e"> this article.</a> )
+
+```
+const [lang, setLang] = useState("en");
+```
+
+You need to have a state that holds your current language. If you know how to work with global
+state management tools, like Redux, Zustand, Recoil…., you can use them. Otherwise, like old me, I
+declared the state in main. jsx, which in my case was the parent. Then I passed it as a prop,
+which caused a lot of prop drilling, so I do not recommend doing that.
+
+```import { useEffect, useState } from "react";
+import styles from "./MultiLanguageButton.module.scss";
+function MultiLanguageButton({ lang, onLang }) {
+const [currentPosition, setCurrentPosition] = useState({});
+
+function handleClick(e) {
+onLang(e.target.id);
+}
+
+useEffect(() => {
+if (lang === "en") setCurrentPosition({ transform: "translateX(4px)" });
+if (lang === "ja") setCurrentPosition({ transform: "translateX(-38px)" });
+}, [lang]);
+
+return (
+
+<div className={styles.btn_box}>
+  <div className={styles.country_box}>
+    <span>🇯🇵</span>
+    <span>🇬🇧</span>
+  </div>
+  <div
+    className={styles.outer_btn}
+    aria-description="Choose a language to read, in Japanese or English."
+  >
+    <span className={styles.circle} style={currentPosition}></span>
+    <button
+      className={styles.inner_btn}
+      id="ja"
+      onClick={handleClick}
+      aria-label="日本語で読む"
+      lang="ja"
+    ></button>
+    <button
+      className={styles.inner_btn}
+      id="en"
+      onClick={handleClick}
+      aria-label="Read in English"
+    ></button>
+  </div>
+</div>
+); }
+
+export default MultiLanguageButton;
+```
+
+Then you need to implement a button or similar that allows the user to change the language option.
+Add an event handler to get a value, then you can set it to the state.
+
+```
+export const heroText = {
+  en: " I've transitioned from a French pastry chef to a front-end developer, started to teach myself JavaScript, React, Next.js,Astro.js and CSS/SCSS in 2021 and currently enrolle in Technigo's Bootcamp to enrich my programming skills. I am passionate about writing clean, solid code, learning new things and trying new technologies. I am delving into computer science as well 💻",
+  ja: "元フランス菓子のパティシエのフロントエンドエンジニアです。２０２１年からプログラミングを自分で勉強し始め、現在はスウェーデンのTechnigoというプログラミングスクールで勉強中です。プログラムが大好きで、隙間時間があればコードを書くかプロジェクトのことを考えています。私は、いかに綺麗に良いパフォーマンスのコードを書けるかを大切にしております。",
+};
+```
+
+Don’t forget to consider your data structure, this will make your life easier!
+
+```
+<p className={styles.text} lang={lang}>
+  {heroText[lang]}
+</p>
+```
+
+When you use data, you can use state as a key. So simple, right?
+
+```
+useEffect(() => {
+    document.documentElement.lang = lang;
+  }, [lang]);
+```
+
+Finally, you can add useEffect to modify the html lang tag, so that accessibility is covered! You
+are very welcome to check my code on GitHub.
+
+<span className="font-bold">
+  Check the original code: <a href="https://github.com/sansan-sakura/project-portfolio">Github</a>
+</span>
+
+<span className="flex font-bold items-start">
+  This is initially published on&nbsp;
+  <a href="https://medium.com/@sito6496t/how-to-make-your-website-internationalized-without-react-i18n-0525f74d2530">
+    Medium
+  </a>
+</span>

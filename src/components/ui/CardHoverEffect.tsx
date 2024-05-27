@@ -10,8 +10,8 @@ export const HoverEffect = ({ items, className }: { items: any; className?: stri
   return (
     <div className={cn('grid grid-cols-1 py-10 max-w-[500px]', className)}>
       {items.map((item: any, idx: number) => {
-        if (!item.meta.published) return null;
-        const publishedAt = new Date(item.meta.date);
+        if (!item.published) return null;
+        const publishedAt = new Date(item.date);
         const formattedDate = new Intl.DateTimeFormat('en-US', {
           day: '2-digit',
           month: '2-digit',
@@ -44,9 +44,9 @@ export const HoverEffect = ({ items, className }: { items: any; className?: stri
             </AnimatePresence>
             <Card>
               <p className="text-white text-[10px] mb-3">{formattedDate}</p>
-              <CardTitle>{item.meta.title}</CardTitle>
+              <CardTitle>{item.title}</CardTitle>
               <ul className="flex gap-2 mt-3">
-                {item.meta.tags.map((tag: string) => (
+                {item.tags.map((tag: string) => (
                   <p
                     key={tag}
                     className="text-xs text-white border-[0.5px] border-white py-0.5 px-1 rounded"
@@ -55,7 +55,7 @@ export const HoverEffect = ({ items, className }: { items: any; className?: stri
                   </p>
                 ))}
               </ul>
-              <CardDescription>{item.meta.description}</CardDescription>
+              <CardDescription>{item.description}</CardDescription>
             </Card>
           </Link>
         );
