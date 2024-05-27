@@ -1,19 +1,17 @@
 # ontheway
 
-It is under construction 🚜
+A simple blog to track my programming learning journey built with Next14. 
 
-This is my blog for my programming learning journey!!
+------------------------------------------------------------------
 
-Note:
 
-Next.js 14
 
-Shadcn UI
+-Shadcn UI
 
-Aceternity UI
+-Aceternity UI
 
-React-icon
+-React-icon
 
-MDX
+-MDX
 
-Tailwind CSS
+-Tailwind CSS
