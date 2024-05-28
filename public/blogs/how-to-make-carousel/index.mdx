@@ -1,0 +1,118 @@
+---
+title: Building Carousel from scratch
+description: How to make a carousel from scratch as a React Beginner
+date: 2023-11-13
+tags: ['React', 'Carousel', 'without library']
+published: true
+---
+
+<img src="/blogs/how-to-make-carousel/carousel.webp" />
+
+I heard that making a carousel from scratch was
+difficult before, and I wondered if that was true. I did some research about it and found that actually,
+it is fairly easy.
+
+Moreover, it is lighter than using a library, so why not?
+
+So I would like to share how to make one from scratch.
+
+```
+<div className="carousel">
+    <ul>
+        <li className="red"></li>
+        <li className="green"></li>
+        <li className="orange"></li>
+    </ul>
+</div>
+```
+
+For the HTML, I need a div as a frame, and inside of the div, added an ul to store all the list items that are carousel items.
+
+For the div, I also added ref to attach a function, so that when you click a button, it moves to the next item. I also added buttons. Now, it looks like this.
+
+```
+<div className="carousel" ref={carouselRef}>
+    <ul>
+        <li className="red"></li>
+        <li className="green"></li>
+        <li className="orange"></li>
+    </ul>
+    <button className="leftBtn" onClick={handleLeftClick}>
+          &larr;
+    </button>
+    <button className="rightBtn" onClick={handleRightClick}>
+          &rarr;
+    </button>
+ </div>
+
+
+```
+
+Then, I created functions for buttons. ( handleLeftClick and handleRightClick)
+
+```
+function handleLeftClick() {
+    carouselRef.current.scrollLeft -= 200;
+  }
+```
+
+```
+
+function handleRightClick() {
+carouselRef.current.scrollLeft += 200;
+}
+
+```
+
+Here, I used a built-in JS method called scrollLeft. here is more info
+
+Because each item has a width of 200px, I wrote 200 above, so when you create your own, you should adjust for your own needs.
+
+Now, it is time for CSS.
+
+For a div, I added overflow: scroll; and fixed width to only show one item.
+
+Also, I added scroll-snap-type. This is a fantastic CSS property when you make a carousel as it prevents items from being cut. So one item will be always fully shown and not two cut items at the same time. ( For each item, you also need scroll-snap-align: start; to make this work)
+
+As I want to hide the scroll bar, I added a webkit-scrollbar display: hidden;
+
+```
+.carousel {
+  display: relative;
+  width: 200px;
+  overflow: scroll;
+  padding: 10px;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+}
+
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+
+ul {
+  display: flex;
+  width: fit-content;
+}
+
+.red,
+.green,
+.orange {
+  width: 200px;
+  height: 200px;
+  border: 1px solid #444;
+  list-style: none;
+  scroll-snap-align: start;
+}
+
+```
+
+I added a width of fit-item and flex to ul to put items in one row.
+
+Now, it is done. This is a simple carousel and you can add more features like pagination, a function that scrolls automatically, and more.
+
+Here is an example that I made for this on <a href='https://codesandbox.io/s/purple-rgb-s5fz5z?file=/src/styles.css:550-731'>code sandbox</a>.
+
+I hope it is helpful and happy coding!!
+
+This is originally published on <a href="https://medium.com/@sito6496t/how-to-make-a-carousel-from-scratch-as-a-react-beginner-a58250aaf1ab">Medium.</a>

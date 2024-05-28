@@ -1,0 +1,51 @@
+---
+title: Promise.all()
+description: How to fetch multiple APIs
+date: 2023-11-14
+tags: ['PromiseAll', 'JavaScript', 'React']
+published: true
+---
+
+<img src="/blogs/fetch-multiple-urls/api.webp" />
+Usually, when I want to fetch data with API, then I use just async await as normal.
+
+But when I was working on a movie App project with React at Technigo, I got the idea of displaying different kinds of movies at the same time, like Netflix. But what if I do it one by one, it must lower the performance. So I researched and found the way with Promis All, which I would like to share today.
+
+Usually, you write your code like this when you want to fetch data.
+
+```
+
+const fetchApi= async ()=>{
+try{
+const data= await fethc('https://jsonplaceholder.typicode.com/todos/1');
+const res= await data.json();
+ console.log(data) // this is an example, so I am just logging it.
+} catch{
+....}
+
+
+```
+
+And when you want to fetch multiple APIs at the same time, you can write like this.
+
+```
+
+const fetchApi= async ()=>{
+try{
+const data= await Promis.all([
+fetch('https://jsonplaceholder.typicode.com/todos/1'),
+fetch('https://jsonplaceholder.typicode.com/photos/1'),
+fetch('https://jsonplaceholder.typicode.com/albums/1')])
+const res= await data.json();
+ console.log(data) // this is an example, so I am just logging it.
+} catch{
+....}
+
+
+```
+
+Instead of just writing fetch(….), add Promis.all in front of it, and make an array of from what you want to make a promise. This could make a huge difference in performance, so when you encounter a situation where you want to make multiple Promises at the same time, use this! <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all"> More about Promis.all() </a>
+
+That is all and happy coding !!
+
+This is originally published on <a href='https://medium.com/@sito6496t/how-to-fetch-multiple-apis-c59fec9076e2'>Medium</a>
